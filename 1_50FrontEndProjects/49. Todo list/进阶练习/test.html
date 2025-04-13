@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let balance = 100
+        let amount
+        while (true) {
+            amount = Number(prompt('please enter amount'))
+            if (!isNaN(amount) && amount > 0) {
+                break
+            }
+            alert('please enter valid number')
+        }
+
+        if (amount > balance) {
+            alert('balance not enough')
+        } else {
+            balance -= amount
+            alert(`withdraw successfully, your balance is ${balance}`)
+        }
+
+
+    </script>
+</body>
+
+</html>

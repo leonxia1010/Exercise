@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: pink;
+  align-items: center;
+  overflow: hidden;
+  height: 100vh;
+}
+
+p {
+  font-size: 40px;
+  margin-top: 40vw;
+}
+
+div {
+  margin-top: 35vw;
+  width: 150px;
+  background-color: rgba(0, 0, 0, 0.3);
+  height: 30px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+label {
+  line-height: 30px;
+}
+
+#speed {
+  background-color: pink;
+  border: none;
+  width: 50px;
+  height: 20px;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+#speed:focus {
+  outline: none;
+}
