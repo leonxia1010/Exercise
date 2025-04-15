@@ -14,7 +14,7 @@ empties.forEach((empty) => {
 function dragStart() {
   this.classList.add('hold');
   setTimeout(() => {
-    this.className = 'invisible';
+    this.className = 'aaa';
   }, 0);
 }
 
