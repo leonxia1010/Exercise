@@ -43,7 +43,7 @@ function updateBigCup() {
 
   if (fullCups === 0) {
     percentage.style.visibility = 'hidden';
-    liters.textContent = '2L';
+    litersEl.textContent = '2L';
   } else {
     percentage.style.visibility = 'visible';
     percentage.style.height = `${(fullCups / totalCups) * 100}%`;
@@ -55,6 +55,6 @@ function updateBigCup() {
     remained.style.height = 0;
   } else {
     remained.style.visibility = 'visible';
-    liters.innerText = `${2 - (250 * fullCups) / 1000}L`;
+    litersEl.innerText = `${2 - (250 * fullCups) / 1000}L`;
   }
 }
