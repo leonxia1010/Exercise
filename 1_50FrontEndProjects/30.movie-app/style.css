@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap');
+
+:root {
+  --primary-color: #22254b;
+  --secondary-color: #373b69;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: Montserrat, sans-serif;
+  color: #fff;
+}
+
+.nav {
+  background-color: var(--secondary-color);
+  width: 100%;
+  height: 70px;
+  padding-right: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: sticky;
+  top: 0;
+}
+
+.form {
+  float: right;
+  min-width: 800px;
+}
+
+.search {
+  border-radius: 50px;
+  border: none;
+  height: 30px;
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  padding: 5px 15px;
+  color: #fff;
+  float: right;
+}
+
+.search::placeholder {
+  color: #afb1ce;
+  letter-spacing: 0.5px;
+}
+.search:focus {
+  background-color: var(--primary-color);
+  outline: none;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  overflow: scroll;
+}
+
+.movie {
+  background-color: var(--secondary-color);
+  max-width: 300px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  position: relative;
+  margin: 20px;
+}
+
+img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.profile {
+  padding: 10px 15px 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.rate {
+  color: orange;
+  background: rgba(0, 0, 0, 0.5);
+  height: 30px;
+  padding: 0px 10px;
+  border-radius: 3px;
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.overview {
+  background-color: white;
+  color: black;
+  overflow: scroll;
+  padding: 25px;
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  bottom: 0px;
+  transform: translate(-50%, 100%);
+  transition: transform 0.5s ease;
+}
+
+.movie.active .overview {
+  transform: translate(-50%, 0);
+}
+
+.overview h3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.overview p {
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 300;
+}
