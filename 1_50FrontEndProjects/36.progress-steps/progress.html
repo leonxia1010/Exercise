@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Step</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 400px;
+            padding: 2px 0;
+            position: relative;
+        }
+
+        .progress-container::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+            height: 3px;
+            transform: translateY(-50%);
+            background-color: #383838;
+        }
+
+        .progress {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            z-index: 2;
+            width: 0%;
+            height: 3px;
+            transform: translateY(-50%);
+            background-color: #3498DB;
+            transition: 0.2s ease;
+        }
+
+
+        .circle {
+            height: 30px;
+            width: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: lightgrey;
+            background-color: white;
+            border: 3px solid #383838;
+            z-index: 3;
+            transition: 0.5s ease;
+        }
+
+        .circle.active {
+            border: 3px solid #3498DB;
+        }
+
+        .button-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 10px;
+        }
+
+        .button {
+            background-color: #3498DB;
+            border: none;
+            padding: 5px 20px;
+            border-radius: 3px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .button:disabled {
+            background-color: #383838;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="progress-container">
+            <div class="progress" id="progress"></div>
+            <div class="circle active">1</div>
+            <div class="circle">2</div>
+            <div class="circle">3</div>
+            <div class="circle">4</div>
+        </div>
+        <div class="button-container">
+            <button class="button" id="prev" disabled="true">Prev</button>
+            <button class="button" id="next">Next</button>
+        </div>
+    </div>
+    <script>
+        const prevBtn = document.getElementById('prev')
+        const nextBtn = document.getElementById('next')
+        const progressBar = document.getElementById('progress')
+        const circles = document.querySelectorAll('.circle')
+        let progressIdx = 0
+
+        const update = (idx) => {
+            if (idx === 0) {
+                prevBtn.disabled = true;
+                progressBar.style.width = "0%";
+            }
+            else if (idx === circles.length - 1) {
+                nextBtn.disabled = true;
+                progressBar.style.width = "100%";
+            } else {
+                nextBtn.disabled = false;
+                prevBtn.disabled = false;
+                progressBar.style.width = `${(progressIdx) / (circles.length - 1) * 100}%`
+
+            }
+            circles.forEach((circleEl, index) => {
+                circleEl.className = 'circle'
+                if (index <= progressIdx) circleEl.classList.add('active')
+            })
+        }
+
+        nextBtn.addEventListener('click', () => {
+            progressIdx++
+            update(progressIdx)
+        })
+        prevBtn.addEventListener('click', () => {
+            progressIdx--
+            update(progressIdx)
+        })
+
+    </script>
+</body>
+
+</html>
