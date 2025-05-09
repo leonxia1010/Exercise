@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast-notification</title>
+    <style>
+        body {
+            height: 100vh;
+            overflow: hidden;
+            background-color: rebeccapurple;
+        }
+
+        .card {
+            width: 150px;
+            padding: 10px 5px;
+            border-radius: 5px;
+            background-color: #fff;
+            margin: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        #button {
+            color: rebeccapurple;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+
+        .container {
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="card" id="button">Show Notification</button>
+    <div class="container">
+    </div>
+    <script>
+        const button = document.getElementById('button')
+        const container = document.querySelector('.container')
+        const data = [
+            { msg: 'Massage One', color: 'red' },
+            { msg: 'Massage Two', color: 'green' },
+            { msg: 'Massage Three', color: 'blue' },
+            { msg: 'Massage Four', color: 'yellow' }
+        ]
+        let curr = 0
+
+
+        button.addEventListener('click', () => {
+
+            const card = document.createElement('div')
+            card.className = 'card'
+            card.textContent = data[curr].msg
+            card.style.color = data[curr].color
+            container.appendChild(card)
+            curr < data.length - 1 ? curr++ : curr = 0
+
+
+            setTimeout(() => { card.remove() }, 3000)
+
+        })
+    </script>
+</body>
+
+</html>
