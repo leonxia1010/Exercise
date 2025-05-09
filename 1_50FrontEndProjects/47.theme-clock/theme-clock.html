@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" class>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+        :root {
+            --primary-color: #000;
+            --secondary-color: #fff;
+        }
+
+        body {
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        html {
+            transition: 0.5s ease;
+        }
+
+        html.dark {
+            --primary-color: #fff;
+            --secondary-color: #333;
+        }
+
+        html.dark {
+            background-color: #000;
+            color: var(--primary-color);
+
+        }
+
+        .container {
+            width: 200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .button {
+            background-color: var(--primary-color);
+            border: none;
+            color: var(--secondary-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-top: 30px;
+            cursor: pointer;
+        }
+
+        .clock {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            margin-top: 30vh;
+            transform: rotate(180deg);
+
+        }
+
+        .needle {
+            width: 3px;
+            background-color: var(--primary-color);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 65px;
+            transform-origin: top center;
+        }
+
+        .hour {
+            transform: translate(-50%, 0%) rotate(270deg);
+        }
+
+        .minute {
+            height: 100px;
+            transform: translate(-50%, 0%) rotate(90deg);
+        }
+
+        .second {
+            height: 100px;
+            transform: translate(-50%, 0%)rotate(180deg);
+            background-color: #e74c3c;
+            z-index: 6;
+        }
+
+        .pointer {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #383838;
+            width: 6px;
+            height: 6px;
+            border: 2px solid #e74c3c;
+            z-index: 7;
+        }
+
+        .time,
+        .date {
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+
+        .time {
+            font-size: 40px;
+            margin: 10px auto;
+            color: var(--primary-color);
+        }
+
+        .date {
+            color: var(--primary-color);
+            opacity: 0.5;
+            display: inline-block;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .date+span {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: smaller;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button class="button">Dark Mode</button>
+        <div class="clock">
+            <div class="needle hour"></div>
+            <div class="needle minute"></div>
+            <div class="needle second"></div>
+            <div class="pointer"></div>
+        </div>
+        <div class="time" id="time">9:21</span>
+        </div>
+        <div>
+            <div class="date" id="date">FRIDAY, July
+            </div><span class='circle' id="day">11</span>
+        </div>
+    </div>
+
+    <script>
+        const needleHour = document.querySelector('.hour')
+        const needleMinute = document.querySelector('.minute')
+        const needleSecond = document.querySelector('.second')
+        const time = document.getElementById('time')
+        const clockFormat = document.getElementById('clock-format')
+        const dateText = document.getElementById('date')
+        const dayText = document.getElementById('day')
+        const toggle = document.querySelector('.button')
+
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        toggle.addEventListener('click', () => {
+            const html = document.querySelector('html')
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark')
+                toggle.textContent = 'Dark Mode'
+            } else {
+                html.classList.add('dark')
+                toggle.textContent = 'Light Mode'
+            }
+        })
+
+        const setTime = () => {
+            const localTime = new Date()
+            const hour = localTime.getHours()
+            const minute = localTime.getMinutes()
+            const second = localTime.getSeconds()
+            const month = localTime.getMonth()
+            const day = localTime.getDay()
+            const date = localTime.getDate()
+            console.log(hour, minute, second)
+            needleHour.style.transform = `translate(-50%, 0%) rotate(${scale(hour, 0, 12, 0, 360)}deg)`
+            needleMinute.style.transform = `translate(-50%, 0%) rotate(${scale(minute, 0, 60, 0, 360)}deg)`
+            needleSecond.style.transform = `translate(-50%, 0%) rotate(${scale(second, 0, 60, 0, 360)}deg)`
+            time.textContent = `${hour % 12 === 0 ? 12 : String(hour - 12).padStart(2, 0)}:${String(minute).padStart(2, 0)} ${hour >= 12 ? 'PM' : 'AM'}`
+            dateText.textContent = `${days[day].toUpperCase()}, ${months[month].toUpperCase()}`
+            dayText.textContent = date
+        }
+
+
+        const scale = (num, in_min, in_max, out_min, out_max) => {
+            return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+        }
+
+
+        setTime()
+        setInterval(setTime, 1000)
+    </script>
+</body>
+
+</html>
