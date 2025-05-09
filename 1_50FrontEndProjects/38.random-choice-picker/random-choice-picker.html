@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #2b88f0;
+            text-align: center;
+        }
+
+        h3 {
+            color: white;
+        }
+
+        textarea {
+            width: 800px;
+            height: 200px;
+            padding: 10px;
+            resize: none;
+        }
+
+        textarea:focus {
+            outline: none;
+        }
+
+        .output {
+            width: 800px;
+            margin: 30px auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .result {
+            color: white;
+            background-color: #F0932B;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: 0.1s ease;
+        }
+
+        .active {
+            background-color: #383838;
+            color: white;
+        }
+    </style>
+    <title>Random Choice Picker</title>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Enter all of the choices divided by a comma (',').
+            Press enter when you're done
+        </h3>
+        <textarea name="" id="input" placeholder="Enter choice here"></textarea>
+        <div class="output" id="output">
+
+        </div>
+    </div>
+    <script>
+        const inputEl = document.getElementById('input')
+        const output = document.getElementById('output')
+        let currentIdx = null
+        inputEl.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                if (!e.target.value) return
+                inputEl.value = null
+                pickChoice()
+            }
+            if (e.key !== 'Enter') renderChoices(e)
+        })
+
+        function renderChoices(e) {
+            const results = e.currentTarget.value.split(',')
+            output.innerHTML = ""
+            results.forEach((result) => {
+                const resultEl = document.createElement('div')
+                resultEl.className = 'result'
+                resultEl.innerText = result
+                output.appendChild(resultEl)
+            })
+        }
+
+        //   补完下面的逻辑
+        function pickChoice() {
+            const times = 30
+            inputEl.disabled = true
+            const Interval = setInterval(() => {
+                const [randomTag, randomIdx] = selectRandomTag()
+                if (randomIdx === currentIdx) return
+
+                highLight(randomTag)
+                currentIdx = randomIdx
+                setTimeout(() => {
+                    unHighLight(randomTag)
+                }, 100)
+            }, 100)
+
+            setTimeout(() => {
+                clearInterval(Interval)
+                currentIdx = null
+                const tagData = selectRandomTag()
+                highLight(tagData[0])
+                inputEl.disabled = false
+            }, 100 * times)
+        }
+
+        function highLight(element) {
+            element.classList.add('active')
+        }
+
+        function unHighLight(element) {
+            element.classList.remove('active')
+        }
+
+        function selectRandomTag() {
+            const tags = document.querySelectorAll('.result')
+            const randomNum = Math.floor(Math.random() * tags.length)
+            return [tags[randomNum], randomNum]
+        }
+    </script>
+</body>
+
+</html>
