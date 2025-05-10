@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --primary-color: #F9CA24;
+            --secondary-color: #f6e58d;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .rotate {
+            background-color: var(--primary-color);
+            padding: 5px 15px;
+            border: none;
+            border-radius: 5px;
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 1px 1px 1px var(--secondary-color);
+        }
+
+        .boxes {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -40%);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: grey;
+            position: relative;
+            background: url(https://media.giphy.com/media/EZqwsBSPlvSda/giphy.gif);
+            background-repeat: no-repeat;
+            background-size: 400px 400px;
+            background-origin: top left;
+            transition: 0.4s ease;
+            background-position-x: 0;
+            background-position-y: 0;
+        }
+
+        .box::before,
+        .box::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .box::before {
+            background-color: var(--primary-color);
+            z-index: -1;
+            right: -6px;
+            top: 2px;
+            width: 7px;
+            transform: skewY(45deg);
+        }
+
+        .box::after {
+            background-color: var(--secondary-color);
+            z-index: -1;
+            height: 8px;
+            bottom: -7px;
+            left: 3px;
+            transform: skewX(45deg);
+        }
+
+        .big {
+            gap: 0;
+        }
+
+        .big .box {
+            transform: rotate(360deg);
+        }
+
+        .big .box::before,
+        .big .box::after {
+            width: 0;
+            height: 0;
+            transform: translate(0, 0);
+        }
+    </style>
+    <title>3D-boxes-background</title>
+</head>
+
+<body>
+    <button class="rotate" id="rotate">
+        Magic
+    </button>
+    <div class="boxes big" id="boxes">
+
+    </div>
+
+
+    <script>
+        const boxes = document.getElementById('boxes')
+        const button = document.getElementById('rotate')
+        const columns = 4, rows = 4
+        function generateBoxes() {
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < columns; j++) {
+                    const box = document.createElement('div')
+                    box.className = 'box'
+                    box.style.backgroundPosition = `${j * -100}px ${i * -100}px`
+                    boxes.appendChild(box)
+                }
+            }
+        }
+        button.addEventListener('click', () => { boxes.classList.toggle('big') })
+        generateBoxes()
+
+    </script>
+</body>
+
+</html>
