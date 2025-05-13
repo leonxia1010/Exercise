@@ -1,0 +1,86 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+body {
+  background-color: #374151;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  max-width: 24rem;
+  border-radius: 1rem;
+  padding: 4rem;
+  background-color: rgba(17, 24, 39, 0.8);
+  color: white;
+  text-align: center;
+}
+
+h3 {
+  font-size: 2.25rem;
+}
+
+h2 {
+  color: #bfdbfe;
+  font-size: 3rem;
+  font-weight: 300;
+}
+
+.clock {
+  width: 210px;
+  height: 210px;
+  position: relative;
+}
+
+p {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.75rem;
+  line-height: 1;
+  margin: 0;
+  color: #bfdbfe;
+}
+
+.buttons {
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 20px;
+}
+
+.button {
+  background-color: #93c5fd;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  color: #374151;
+}
+
+.progress {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.dot {
+  transform-origin: center center;
+}
