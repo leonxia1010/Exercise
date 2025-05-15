@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>split landing page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="split ps5">
+            <h3 class="title">Playstation 5</h3>
+            <button class="button">BUY NOW</button>
+        </div>
+        <div class="split xbox">
+            <h3 class="title">XBox Series X</h3>
+            <button class="button">BUY NOW</button>
+        </div>
+    </div>
+    <script>
+        const splitLeft = document.querySelector('.split.ps5')
+        const splitRight = document.querySelector('.split.xbox')
+        const container = document.querySelector('.container')
+        splitLeft.addEventListener('mouseenter', () => { container.classList.add('left') })
+        splitLeft.addEventListener('mouseleave', () => { container.classList.remove('left') })
+        splitRight.addEventListener('mouseenter', () => { container.classList.add('right') })
+        splitRight.addEventListener('mouseleave', () => { container.classList.remove('right') })
+
+    </script>
+</body>
+
+</html>
